@@ -1,0 +1,19 @@
+# WordPress core files in the docroot
+/public/
+
+# Composer-managed dependencies
+/vendor/
+
+# Source-managed custom code is tracked under src/
+!src/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Local tooling
+/node_modules/
+/.idea/
+.DS_Store
+Thumbs.db

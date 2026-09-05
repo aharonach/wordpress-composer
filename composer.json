@@ -1,0 +1,54 @@
+{
+  "name": "aharon/wordpress-herd-boilerplate",
+  "description": "Lightweight WordPress boilerplate for Laravel Herd with Composer-managed packages in src/.",
+  "type": "project",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "path",
+      "url": "src/plugins/*",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "src/themes/*",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "require": {
+    "php": ">=8.2",
+    "johnpbloch/wordpress": "^7.1",
+    "wpackagist-plugin/seo-by-rank-math": "^1.0.216"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "johnpbloch/wordpress-core-installer": true
+    },
+    "preferred-install": "dist"
+  },
+  "scripts": {
+    "setup": "bash ./setup.sh",
+    "post-install-cmd": [],
+    "post-update-cmd": []
+  },
+  "extra": {
+    "wordpress-install-dir": "public",
+    "installer-paths": {
+      "public/wp-content/plugins/{$name}": [
+        "type:wordpress-plugin"
+      ],
+      "public/wp-content/themes/{$name}": [
+        "type:wordpress-theme"
+      ]
+    }
+  }
+}

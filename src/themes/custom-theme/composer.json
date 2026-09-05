@@ -1,0 +1,6 @@
+{
+  "name": "aharon/custom-theme",
+  "type": "wordpress-theme",
+  "version": "1.0.0",
+  "description": "Custom WordPress theme for the Aharon project."
+}
