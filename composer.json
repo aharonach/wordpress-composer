@@ -1,6 +1,6 @@
 {
-  "name": "aharon/wordpress-herd-boilerplate",
-  "description": "Lightweight WordPress boilerplate for Laravel Herd with Composer-managed packages in src/.",
+  "name": "aharon/wordpress-composer-boilerplate",
+  "description": "Lightweight WordPress boilerplate with Composer-managed packages in src/, compatible with Apache, Laravel Herd, and standard local PHP stacks.",
   "type": "project",
   "license": "MIT",
   "repositories": [

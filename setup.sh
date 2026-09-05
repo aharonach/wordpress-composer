@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Composer-managed WordPress bootstrap for Laravel Herd.
+# Composer-managed WordPress bootstrap.
+# Works with Apache (VirtualHost / MAMP / XAMPP / LAMP), Laravel Herd, or any standard local PHP environment.
 # Prompts for the local values you commonly change before installing WordPress.
 
 PROJECT_DIR="${PROJECT_DIR:-$(pwd)}"
@@ -14,8 +15,8 @@ DB_USER="${DB_USER:-root}"
 DB_PASSWORD="${DB_PASSWORD:-root}"
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PREFIX="${DB_PREFIX:-wp_}"
-SITE_URL="${WP_HOME:-http://wordpress.test}"
-SITE_TITLE="${WP_TITLE:-Herd WordPress}"
+SITE_URL="${WP_HOME:-http://localhost}"
+SITE_TITLE="${WP_TITLE:-WordPress Site}"
 ADMIN_USER="${WP_ADMIN_USER:-admin}"
 ADMIN_PASSWORD="${WP_ADMIN_PASSWORD:-Password123!}"
 ADMIN_EMAIL="${WP_ADMIN_EMAIL:-admin@example.test}"
@@ -64,8 +65,8 @@ DB_USER="${DB_USER:-root}"
 DB_PASSWORD="${DB_PASSWORD:-root}"
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PREFIX="${DB_PREFIX:-wp_}"
-SITE_URL="${WP_HOME:-${SITE_URL:-http://wordpress.test}}"
-SITE_TITLE="${WP_TITLE:-${SITE_TITLE:-Herd WordPress}}"
+SITE_URL="${WP_HOME:-${SITE_URL:-http://localhost}}"
+SITE_TITLE="${WP_TITLE:-${SITE_TITLE:-WordPress Site}}"
 ADMIN_USER="${WP_ADMIN_USER:-admin}"
 ADMIN_PASSWORD="${WP_ADMIN_PASSWORD:-Password123!}"
 ADMIN_EMAIL="${WP_ADMIN_EMAIL:-admin@example.test}"

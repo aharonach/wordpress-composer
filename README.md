@@ -1,12 +1,14 @@
-# Herd WordPress Boilerplate
+# WordPress Composer Boilerplate
 
-This repository uses Composer to manage WordPress in Laravel Herd. Keep your custom theme and plugin source in `src/`, and let Composer sync those folders into `public/wp-content` as symlinks (or copies if symlinks are unavailable).
+This repository uses Composer to manage WordPress with a clean separation of concerns. It is stack-agnostic and works out of the box with standard **Apache** environments (VirtualHosts, MAMP, XAMPP, LAMP), **Laravel Herd**, or any PHP/MySQL local setup.
+
+Your custom themes and plugins live in `src/` as local Composer path packages, while WordPress core and third-party plugins are installed in the `public/` web root.
 
 ## Recommended local folder layout
-In Herd, point the site document root at the repo's `public/` directory. The project layout looks like this:
+Set your Apache `DocumentRoot` (or Herd site root) to the repo's `public/` directory:
 
 ```text
-~/Herd/my-site.test/
+my-project/
 ├── .env.example
 ├── .gitignore
 ├── README.md
@@ -16,9 +18,11 @@ In Herd, point the site document root at the repo's `public/` directory. The pro
 ├── src/
 │   ├── plugins/
 │   │   └── custom-plugin/
+│   │       ├── composer.json
 │   │       └── custom-plugin.php
 │   └── themes/
 │       └── custom-theme/
+│           ├── composer.json
 │           ├── functions.php
 │           ├── index.php
 │           └── style.css
@@ -28,48 +32,50 @@ In Herd, point the site document root at the repo's `public/` directory. The pro
 │   ├── wp-content/
 │   │   ├── plugins/
 │   │   │   ├── custom-plugin -> ../../../src/plugins/custom-plugin
-│   │   │   ├── classic-editor/
-│   │   │   ├── wordpress-seo/
-│   │   │   └── wp-mail-smtp/
+│   │   │   └── seo-by-rank-math/
 │   │   └── themes/
-│   │       ├── custom-theme -> ../../../src/themes/custom-theme
-│   │       └── twentytwentyfive/
+│   │       └── custom-theme -> ../../../src/themes/custom-theme
 │   ├── wp-admin/
 │   ├── wp-includes/
 │   └── ... WordPress core files
 └── .env
 ```
 
-The local site URL in Herd is usually something like:
+### Apache VirtualHost example
+```apache
+<VirtualHost *:80>
+    ServerName my-site.local
+    DocumentRoot "/path/to/my-project/public"
 
-- http://my-site.test
-- https://my-site.test
+    <Directory "/path/to/my-project/public">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+> **Note for Apache:** Ensure `FollowSymLinks` (or `SymLinksIfOwnerMatch`) is enabled in your Directory configuration so Apache can follow the symlinks into `src/`.
 
-If Herd uses a separate folder for the web root, set that folder to `public/` instead of the repo root.
+### Laravel Herd / Valet
+If using Laravel Herd or Valet, simply park or link the project directory and configure the site to use the `public` subdirectory as the document root.
 
 ## Quick start
-1. Install Laravel Herd and ensure `.test` domains are enabled.
-2. Clone this repo into your Herd project directory, for example:
-   - macOS: `~/Herd/my-site.test`
-   - Windows: `C:\Users\you\Herd\my-site.test`
-3. Copy the environment template:
+1. Clone this repository into your local web projects directory.
+2. Copy the environment template:
    ```bash
    cp .env.example .env
    ```
-4. Edit `.env` with your local database values and local URL.
-5. Install Composer dependencies:
+3. Edit `.env` with your local database credentials and local site URL (e.g. `http://my-site.local` or `http://localhost`).
+4. Install dependencies:
    ```bash
    composer install
    ```
-6. Make the setup script executable:
-   ```bash
-   chmod +x setup.sh
-   ```
-7. Run the bootstrap script:
+5. Run the setup script to create the database, generate `wp-config.php`, and install WordPress:
    ```bash
    ./setup.sh
    ```
-8. Visit `http://my-site.test/wp-admin` and log in with the admin credentials from `.env`.
+   *(Or run `composer run setup`)*
+6. Open your site URL in the browser and log in to `/wp-admin`.
 
 ## Source-managed custom code
 This project keeps the source of truth for custom features in `src/`:
@@ -137,6 +143,6 @@ Ignore generated or external code:
 - `public/wp-content/uploads/`
 
 ## Notes
-- Herd handles PHP, MySQL/MariaDB, and domain routing, so no Docker or custom build stack is required.
-- The WordPress docroot is `public/`, which is the Composer-safe way to keep WordPress in a project directory without installing it in the repo root.
-- Your site in Herd should point to the `public/` folder if you want the domain to resolve cleanly.
+- Works with standard Apache installations, MAMP/XAMPP, Laravel Herd, or Valet.
+- The WordPress web root is `public/`. In Apache, set `DocumentRoot` to `.../public` and ensure `Options FollowSymLinks` is enabled so symlinked plugins/themes resolve properly.
+- No Docker or custom node build stacks are required.
