@@ -3,26 +3,6 @@
   "description": "Lightweight WordPress boilerplate with Composer-managed packages in src/, compatible with Apache, Laravel Herd, and standard local PHP stacks.",
   "type": "project",
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    },
-    {
-      "type": "path",
-      "url": "src/plugins/*",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "src/themes/*",
-      "options": {
-        "symlink": true
-      }
-    }
-  ],
   "require": {
     "php": ">=8.3",
     "johnpbloch/wordpress": "*",
@@ -52,5 +32,25 @@
         "type:wordpress-theme"
       ]
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "path",
+      "url": "src/plugins/*",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "src/themes/*",
+      "options": {
+        "symlink": true
+      }
+    }
+  ]
 }
