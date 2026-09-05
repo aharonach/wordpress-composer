@@ -12,7 +12,7 @@ WP_BIN="${WP_BIN:-wp}"
 
 DB_NAME="${DB_NAME:-wordpress}"
 DB_USER="${DB_USER:-root}"
-DB_PASSWORD="${DB_PASSWORD:-root}"
+DB_PASSWORD="${DB_PASSWORD:-}"
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PREFIX="${DB_PREFIX:-wp_}"
 SITE_URL="${WP_HOME:-http://localhost}"
@@ -39,19 +39,35 @@ prompt_for() {
 }
 
 load_env_file() {
+  local line=""
   local key=""
   local value=""
 
   [ -f "$ENV_FILE" ] || return 0
 
-  while IFS='=' read -r key value || [ -n "${key:-}" ]; do
-    if [ -z "$key" ] || [[ "$key" =~ ^[[:space:]]*# ]]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    line="${line%$'\r'}"
+    # Ignore empty lines and comments
+    if [ -z "$line" ] || [[ "$line" =~ ^[[:space:]]*# ]]; then
       continue
     fi
 
-    key="${key%$'\r'}"
-    value="${value%$'\r'}"
-    export "$key=$value"
+    # Split key and value on the first '='
+    if [[ "$line" == *"="* ]]; then
+      key="${line%%=*}"
+      value="${line#*=}"
+      key="$(echo "$key" | xargs)"
+
+      # Strip outer double quotes if present
+      if [[ "$value" =~ ^\"(.*)\"$ ]]; then
+        value="${BASH_REMATCH[1]}"
+      # Strip outer single quotes if present
+      elif [[ "$value" =~ ^\'(.*)\'$ ]]; then
+        value="${BASH_REMATCH[1]}"
+      fi
+
+      export "$key=$value"
+    fi
   done < "$ENV_FILE"
 }
 
@@ -62,7 +78,7 @@ fi
 # Re-apply defaults from the loaded env, then prompt the user for each configurable local value.
 DB_NAME="${DB_NAME:-wordpress}"
 DB_USER="${DB_USER:-root}"
-DB_PASSWORD="${DB_PASSWORD:-root}"
+DB_PASSWORD="${DB_PASSWORD:-}"
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PREFIX="${DB_PREFIX:-wp_}"
 SITE_URL="${WP_HOME:-${SITE_URL:-http://localhost}}"
@@ -86,18 +102,31 @@ if [ -t 0 ]; then
   echo
 fi
 
+write_env_value() {
+  local key="$1"
+  local val="$2"
+  # Quote values containing spaces, quotes, or special characters
+  if [[ "$val" =~ [[:space:]\"\'\#\$\&\*\(\)\<\>\?\|\\\;] ]]; then
+    val="${val//\\/\\\\}"
+    val="${val//\"/\\\"}"
+    printf '%s="%s"\n' "$key" "$val"
+  else
+    printf '%s=%s\n' "$key" "$val"
+  fi
+}
+
 {
-  printf '%s=%q\n' "DB_NAME" "$DB_NAME"
-  printf '%s=%q\n' "DB_USER" "$DB_USER"
-  printf '%s=%q\n' "DB_PASSWORD" "$DB_PASSWORD"
-  printf '%s=%q\n' "DB_HOST" "$DB_HOST"
-  printf '%s=%q\n' "DB_PREFIX" "$DB_PREFIX"
-  printf '%s=%q\n' "WP_HOME" "$SITE_URL"
-  printf '%s=%q\n' "WP_SITEURL" "$SITE_URL"
-  printf '%s=%q\n' "WP_TITLE" "$SITE_TITLE"
-  printf '%s=%q\n' "WP_ADMIN_USER" "$ADMIN_USER"
-  printf '%s=%q\n' "WP_ADMIN_PASSWORD" "$ADMIN_PASSWORD"
-  printf '%s=%q\n' "WP_ADMIN_EMAIL" "$ADMIN_EMAIL"
+  write_env_value "DB_NAME" "$DB_NAME"
+  write_env_value "DB_USER" "$DB_USER"
+  write_env_value "DB_PASSWORD" "$DB_PASSWORD"
+  write_env_value "DB_HOST" "$DB_HOST"
+  write_env_value "DB_PREFIX" "$DB_PREFIX"
+  write_env_value "WP_HOME" "$SITE_URL"
+  write_env_value "WP_SITEURL" "$SITE_URL"
+  write_env_value "WP_TITLE" "$SITE_TITLE"
+  write_env_value "WP_ADMIN_USER" "$ADMIN_USER"
+  write_env_value "WP_ADMIN_PASSWORD" "$ADMIN_PASSWORD"
+  write_env_value "WP_ADMIN_EMAIL" "$ADMIN_EMAIL"
 } > "$ENV_FILE"
 
 if ! command -v composer >/dev/null 2>&1; then
