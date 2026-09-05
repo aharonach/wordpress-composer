@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1be91a77d8855ab092c993ef916e2a27",
+    "content-hash": "75080fe4d76758b22e486cb02a57534d",
     "packages": [
         {
             "name": "aharon/custom-plugin",
