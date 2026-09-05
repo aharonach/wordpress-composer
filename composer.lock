@@ -4,8 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "756ce2def4784c8ac490e8fead71f464",
+    "content-hash": "ee42d1e0d3a7db17e87dae5275f254e0",
     "packages": [
+        {
+            "name": "aharon/custom-plugin",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "src/plugins/custom-plugin",
+                "reference": "56bb4453510f6de485fe3c9161cc875d351aefd2"
+            },
+            "type": "wordpress-plugin",
+            "description": "Custom WordPress plugin for the Aharon project.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "aharon/custom-theme",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "src/themes/custom-theme",
+                "reference": "fe1bd51e296e5371929d1c20720ece6533465c47"
+            },
+            "type": "wordpress-theme",
+            "description": "Custom WordPress theme for the Aharon project.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
         {
             "name": "composer/installers",
             "version": "v2.3.0",

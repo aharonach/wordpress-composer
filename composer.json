@@ -26,6 +26,8 @@
   "require": {
     "php": ">=8.2",
     "johnpbloch/wordpress": "^7.1",
+    "aharon/custom-plugin": "^1.0",
+    "aharon/custom-theme": "^1.0",
     "wpackagist-plugin/seo-by-rank-math": "^1.0.216"
   },
   "config": {
