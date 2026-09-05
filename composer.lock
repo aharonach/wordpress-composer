@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee42d1e0d3a7db17e87dae5275f254e0",
+    "content-hash": "7e5b942bef718108f494641338b1bc59",
     "packages": [
         {
             "name": "aharon/custom-plugin",
@@ -12,7 +12,11 @@
             "dist": {
                 "type": "path",
                 "url": "src/plugins/custom-plugin",
-                "reference": "56bb4453510f6de485fe3c9161cc875d351aefd2"
+                "reference": "437e410daaa773e56ef0d428f7153ed9a9b0c2a8"
+            },
+            "require": {
+                "php": ">=8.3",
+                "wordpress/core-implementation": "*"
             },
             "type": "wordpress-plugin",
             "description": "Custom WordPress plugin for the Aharon project.",
@@ -27,7 +31,11 @@
             "dist": {
                 "type": "path",
                 "url": "src/themes/custom-theme",
-                "reference": "fe1bd51e296e5371929d1c20720ece6533465c47"
+                "reference": "3fb24be4c4d4a77de381555edfcd7a617e3bbfa5"
+            },
+            "require": {
+                "php": ">=8.3",
+                "wordpress/core-implementation": "*"
             },
             "type": "wordpress-theme",
             "description": "Custom WordPress theme for the Aharon project.",
@@ -356,7 +364,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.2"
+        "php": ">=8.3"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

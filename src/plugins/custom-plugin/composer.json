@@ -2,5 +2,9 @@
   "name": "aharon/custom-plugin",
   "type": "wordpress-plugin",
   "version": "1.0.0",
-  "description": "Custom WordPress plugin for the Aharon project."
+  "description": "Custom WordPress plugin for the Aharon project.",
+  "require": {
+    "php": ">=8.3",
+    "wordpress/core-implementation": "*"
+  }
 }
