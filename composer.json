@@ -1,13 +1,13 @@
 {
-  "name": "aharon/wordpress-composer-boilerplate",
+  "name": "aharonach/wordpress-composer-boilerplate",
   "description": "Lightweight WordPress boilerplate with Composer-managed packages in src/, compatible with Apache, Laravel Herd, and standard local PHP stacks.",
   "type": "project",
   "license": "MIT",
   "require": {
     "php": ">=8.3",
     "johnpbloch/wordpress": "*",
-    "aharon/custom-plugin": "*",
-    "aharon/custom-theme": "*",
+    "aharonach/custom-plugin": "*",
+    "aharonach/custom-theme": "*",
     "wpackagist-plugin/seo-by-rank-math": "*"
   },
   "config": {

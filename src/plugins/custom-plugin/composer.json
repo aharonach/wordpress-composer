@@ -1,5 +1,5 @@
 {
-  "name": "aharon/custom-plugin",
+  "name": "aharonach/custom-plugin",
   "type": "wordpress-plugin",
   "version": "1.0.0",
   "description": "Custom WordPress plugin for the Aharon project.",

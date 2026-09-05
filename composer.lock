@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75080fe4d76758b22e486cb02a57534d",
+    "content-hash": "0c7967871d7f4d8ca4b8d2acaed57bb7",
     "packages": [
         {
-            "name": "aharon/custom-plugin",
+            "name": "aharonach/custom-plugin",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "src/plugins/custom-plugin",
-                "reference": "437e410daaa773e56ef0d428f7153ed9a9b0c2a8"
+                "reference": "102f3a0b73100cefd783bb29ae7d847c029dbcf9"
             },
             "require": {
                 "php": ">=8.3",
@@ -26,12 +26,12 @@
             }
         },
         {
-            "name": "aharon/custom-theme",
+            "name": "aharonach/custom-theme",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "src/themes/custom-theme",
-                "reference": "3fb24be4c4d4a77de381555edfcd7a617e3bbfa5"
+                "reference": "99f1375c338d904c7a4f54a342dacc5c14445bb4"
             },
             "require": {
                 "php": ">=8.3",
